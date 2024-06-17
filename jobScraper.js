@@ -1,16 +1,16 @@
-const puppeteer = require("puppeteer")
+const puppeteer = require("puppeteer");
 
-;(async () => {
+(async () => {
   let browser
   try {
     // Launch browser and open a new page
     browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    // Example search term
-    const searchTerm = "senior rust engineer"
+    // Search term for scraping
+    const searchTerm = "growth marketing" // Enter your search term to scrape job listings for a desired role.
 
-    // Example URL (replace with actual job listing URL from a job site)
+    // Job listings url for scraping
     const url = `https://cryptocurrencyjobs.co/?query=${encodeURIComponent(searchTerm)}`
 
     // Navigate to the job listings page
@@ -19,13 +19,12 @@ const puppeteer = require("puppeteer")
 
     // Wait for the page to load completely
     await page.waitForSelector(".ais-Hits-list", {
-      timeout: 30000,
+      timeout: 5000,
     })
 
     // Extract job details including the listing URLs
     const jobListings = await page.evaluate(() => {
       const listings = []
-      // Extract job details
       document.querySelectorAll("ol .ais-Hits-item").forEach(job => {
         const title = job.querySelector("a").innerText
         const company = job.querySelector("h3").innerText
