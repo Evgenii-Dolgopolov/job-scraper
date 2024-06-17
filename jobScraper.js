@@ -22,7 +22,7 @@ const puppeteer = require("puppeteer");
       timeout: 5000,
     })
 
-    // Extract job details including the listing URLs
+    // Extract job details
     const jobListings = await page.evaluate(() => {
       const listings = []
       document.querySelectorAll("ol .ais-Hits-item").forEach(job => {
